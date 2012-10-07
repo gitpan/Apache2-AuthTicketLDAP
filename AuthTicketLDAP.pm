@@ -1,6 +1,6 @@
 package Apache2::AuthTicketLDAP;
 BEGIN {
-  $Apache2::AuthTicketLDAP::VERSION = '0.01';
+  $Apache2::AuthTicketLDAP::VERSION = '0.02';
 }
 
 # ABSTRACT: Cookie Based Access with LDAP Authentication
@@ -230,7 +230,7 @@ sub is_hash_valid {
     my ($db_hash, $ts) = (undef, undef);
 
     # Using our statement cache
-    ($db_hash, $ts) = @{$self->stmt_cache($query, @bind)};
+    ($db_hash, $ts) = @{$self->stmt_cache($query, @bind) || []};
 
     if ($ts) {
         $self->{DBTicketTimeStamp} = $ts;   # cache for later use.
@@ -320,7 +320,7 @@ Apache2::AuthTicketLDAP - Cookie Ticketing with LDAP Authentication
 
 =head1 VERSION
 
-version 0.01
+version 0.02
 
 =head1 SYNOPSIS
 
